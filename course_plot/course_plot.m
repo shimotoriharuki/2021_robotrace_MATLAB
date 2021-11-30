@@ -1,13 +1,27 @@
-distance = load("datas/2021-08-18delta_distance.txt");
-theta = load("datas/2021-08-18delta_theta.txt");
+distance = load("datas/DIS_S2.txt");
+theta = load("datas/TH_S2.txt");
 
 % データが有るところだけ抽出
 distance = nonzeros(distance);
-theta = theta([1:size(distance)]);
+theta = theta(1:size(distance));
 
+theta_adj = theta .* 1;
+
+x = 0;
+y = 0;
+th = 0;
+
+X = [];
+Y = [];
 for i = 1:size(distance)
+    
+    x = x + distance(i) * cos(th + theta_adj(i)/2);
+    y = y + distance(i) * sin(th + theta_adj(i)/2);
+    th = th + theta_adj(i);
+    X = [X x];
+    Y = [Y y];
 end
-x = distance .* sin(theta);
-y = distance .* cos(theta);
 
-scatter(x, y)
+
+scatter(X, Y)
+axis equal
