@@ -1,6 +1,3 @@
-clear
-clc
-
 % M系列信号の応答をプロット
 logs_origin = importdata("log/MSIGRES.txt");
 number_of_data = 5000;
