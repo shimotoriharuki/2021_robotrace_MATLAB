@@ -1,5 +1,5 @@
-clear
 clc
+clear
 
 % ステップ応答をプロット
 logs_origin = importdata("log/ROTSTEP.txt");
