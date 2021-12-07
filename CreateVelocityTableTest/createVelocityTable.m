@@ -1,4 +1,5 @@
 clf
+clear
 distance = load("datas/DISTANCE.txt");
 theta = load("datas/THETA.txt");
 
@@ -26,10 +27,9 @@ for i = 1:size(distance)
 
 end
 
-
 radius = distance ./ theta;
-radius(radius>1000)=1000;
-radius(radius<-1000)=-1000;
+radius(radius>1000) = 1000;
+radius(radius<-1000) = -1000;
 
 radius_size = length(radius);
 
@@ -48,7 +48,12 @@ for i = 1 : radius_size-1
 end
 
 figure(1)
-hold on
+subplot(2, 1, 1)
 scatter(X, Y, 10, colorAry)
+title('ロボットの位置')
+axis equal
+
+subplot(2, 1, 2)
 scatter(X_sens, Y_sens, 10, [0, 0, 1])
+title('センサーの位置')
 axis equal
