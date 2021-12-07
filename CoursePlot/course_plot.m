@@ -1,5 +1,5 @@
-distance = load("datas/DIS_S2.txt");
-theta = load("datas/TH_S2.txt");
+distance = load("datas/DISTANCE.txt");
+theta = load("datas/THETA.txt");
 
 % データが有るところだけ抽出
 distance = nonzeros(distance);
