@@ -87,7 +87,7 @@ ylim([1.2 1.9])
 decelerate_table = vel_table;
 idx = length(vel_table);
 
-am = 0.1;
+am = 0.05;
 while idx > 1
     if decelerate_table(idx-1) - decelerate_table(idx) > 0 % 正のとき
         t = 10e-3 / (decelerate_table(idx-1) - decelerate_table(idx));
