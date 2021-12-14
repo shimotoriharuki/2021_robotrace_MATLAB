@@ -82,18 +82,21 @@ vel_table = vel_table(1:size(distance));
 subplot(2, 1, 1)
 t = 0:length(vel_table)-1;
 plot(t, vel_table)
-ylim([1.2 1.9])
+% ylim([1.2 1.9])
 
 decelerate_table = vel_table;
 idx = length(vel_table);
 
-am = 0.05;
+am = 1;
 while idx > 1
     if decelerate_table(idx-1) - decelerate_table(idx) > 0 % 正のとき
         t = 10e-3 / (decelerate_table(idx-1) - decelerate_table(idx));
         a = (decelerate_table(idx-1) - decelerate_table(idx)) / t;
         if a > am
-            decelerate_table(idx-1) = decelerate_table(idx) + am * t;
+%             decelerate_table(idx-1) = decelerate_table(idx) + am * t;%  
+%             decelerate_table(idx-1) = decelerate_table(idx) + sqrt(am*10e-3);
+            decelerate_table(idx-1) = decelerate_table(idx) + am*10e-3;
+
         end
     end
     idx = idx - 1;
@@ -102,9 +105,9 @@ end
 subplot(2, 1, 2)
 t = 0:length(decelerate_table)-1;
 plot(t, decelerate_table)
-ylim([1.2 1.9])
+% ylim([1.2 1.9])
 
-%{
+
 %---------------------------------------%
 figure(3)
 first_distance = [0];
@@ -119,4 +122,3 @@ hold on
 t = 0:length(distance2)-1;
 plot(t, distance2)
 hold off
-%}

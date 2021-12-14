@@ -93,9 +93,9 @@ vel_table = vel_table(1:size(distance));
 subplot(2, 1, 1)
 t = 0:length(vel_table)-1;
 plot(t, vel_table)
-ylim([0.9 1.8])
+% ylim([0.9 1.8])
 
-subplot(2, 1, 2)
-t = 0:length(distance2)-1;
-plot(t, distance2)
-ylim([0.9 1.8])
+% subplot(2, 1, 2)
+% t = 0:length(distance2)-1;
+% plot(t, distance2)
+% ylim([0.9 1.8])
