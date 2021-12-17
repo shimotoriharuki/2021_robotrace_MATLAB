@@ -43,14 +43,14 @@ end
 
 
 theta(theta==0) = 0.00001;
-radius = distance ./ theta;
-radius(radius>1500) = 1500;
-radius(radius<-1500) = -1500;
+radius = abs(distance ./ theta);
+radius(radius>5000) = 5000;
+radius(radius<-5000) = -5000;
 
 theta2(theta2==0) = 0.00001;
-radius2 = distance2 ./ theta2;
-radius2(radius2>1500) = 1500;
-radius2(radius2<-1500) = -1500;
+radius2 = abs(distance2 ./ theta2);
+radius2(radius2>5000) = 5000;
+radius2(radius2<-5000) = -5000;
 
 radius_size = length(radius);
 radius_size2 = length(radius2);
@@ -78,24 +78,34 @@ title('2走目')
 axis equal
 
 figure(2)
-subplot(2, 1, 1)
+% subplot(2, 1, 1)
 t = 0:radius_size-1;
+% hold on
 plot(t, abs(radius))
 title('半径')
 
-subplot(2, 1, 2)
-t = 0:radius_size2-1;
-plot(t, abs(radius2))
-title('半径')
+% subplot(2, 1, 2)
+% radius_f = medfilt1(radius, 30);
+% radius_f= lowpass(radius, 1e-5);
+
+t = 0:length(radius)-1;
+plot(t, abs(radius))
+title('半径 ')
+hold off
 
 figure(3)
 vel_table = vel_table(1:size(distance));
-subplot(2, 1, 1)
+% subplot(2, 1, 1)
+hold on
 t = 0:length(vel_table)-1;
 plot(t, vel_table)
 % ylim([0.9 1.8])
-
+% vel_table_med = medfilt1(vel_table, 20);
+% t = 0:length(vel_table)-1;
+% plot(t, vel_table_med)
+% hold off
 % subplot(2, 1, 2)
-% t = 0:length(distance2)-1;
-% plot(t, distance2)
+t = 0:length(distance2)-1;
+plot(t, distance2)
+hold off
 % ylim([0.9 1.8])
