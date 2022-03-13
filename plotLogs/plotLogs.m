@@ -1,10 +1,10 @@
 clf
 clear
-distance = load("student/DISTANCE.txt");
-theta = load("student/THETA.txt");
-vel_table = load("student/VELTABLE.TXT");
-distance2 = load("student/DISTANC2.txt");
-theta2 = load("student/THETA2.txt");
+distance = load("datas/DISTANCE.txt");
+theta = load("datas/THETA.txt");
+vel_table = load("datas/VELTABLE.TXT");
+distance2 = load("datas/DISTANC2.txt");
+theta2 = load("datas/THETA2.txt");
 
 
 % データが有るところだけ抽出
@@ -105,7 +105,7 @@ plot(t, vel_table)
 % plot(t, vel_table_med)
 % hold off
 % subplot(2, 1, 2)
-t = 0:length(distance2)-1;
-plot(t, distance2)
-hold off
+% t = 0:length(distance2)-1;
+% plot(t, distance2)
+% hold off
 % ylim([0.9 1.8])

@@ -2,9 +2,9 @@ clf
 clear
 distance = load("datas2/DISTANCE.txt");
 theta = load("datas2/THETA.txt");
-vel_table = load("datas2/VELTABLE.TXT");
 distance2 = load("datas2/DISTANC2.txt");
 theta2 = load("datas2/THETA2.txt");
+vel_table = load("datas2/VELTABLE.TXT");
 
 
 % データが有るところだけ抽出
@@ -112,7 +112,7 @@ plot(t, decelerate_table)
 figure(3)
 first_distance = [0];
 for i = 1:size(distance)
-    first_distance = [first_distance, first_distance(i)+distance(i)];
+    first_distance = [first_distance, first_distance(i) + distance(i)];
 end
 
 t = 0:length(first_distance)-1;
@@ -120,5 +120,5 @@ plot(t, first_distance)
 hold on
 
 t = 0:length(distance2)-1;
-plot(t, distance2)
+plot(t, distance2./0.9663)
 hold off
