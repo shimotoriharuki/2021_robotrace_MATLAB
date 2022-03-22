@@ -1,10 +1,10 @@
 clf
 clear
-distance = load("datas/DISTANCE.txt");
-theta = load("datas/THETA.txt");
-vel_table = load("datas/VELTABLE.TXT");
-distance2 = load("datas/DISTANC2.txt");
-theta2 = load("datas/THETA2.txt");
+distance = load("COURSLOG/DISTANCE.txt");
+theta = load("COURSLOG/THETA.txt");
+distance2 = load("COURSLOG/DISTANC2.txt");
+theta2 = load("COURSLOG/THETA2.txt");
+vel_table = load("COURSLOG/VELTABLE.TXT");
 
 
 % データが有るところだけ抽出
@@ -20,12 +20,15 @@ y = 0;
 th = 0;
 X = [];
 Y = [];
+pre_distance = 0;
 for i = 1:size(distance)
-    x = x + distance(i) * cos(th + theta(i)/2);
-    y = y + distance(i) * sin(th + theta(i)/2);
+    x = x + (distance(i) - pre_distance) * cos(th + theta(i)/2);
+    y = y + (distance(i) - pre_distance) * sin(th + theta(i)/2);
     th = th + theta(i);
     X = [X x];
     Y = [Y y];
+
+    pre_distance = distance(i);
 end
 
 x2 = 0;
@@ -33,17 +36,20 @@ y2 = 0;
 th2 = 0;
 X2 = [];
 Y2 = [];
+pre_distance = 0;
 for i = 1:size(distance2)
-    x2 = x2 + distance2(i) * cos(th2 + theta2(i)/2);
-    y2 = y2 + distance2(i) * sin(th2 + theta2(i)/2);
+    x2 = x2 + (distance2(i) - pre_distance) * cos(th2 + theta2(i)/2);
+    y2 = y2 + (distance2(i) - pre_distance) * sin(th2 + theta2(i)/2);
     th2 = th2 + theta2(i);
     X2 = [X2 x2];
     Y2 = [Y2 y2];
+    pre_distance = distance2(i);
 end
 
-
+distance_shift = circshift(distance, 1);
+distance_shift(1) = 0;
 theta(theta==0) = 0.00001;
-radius = abs(distance ./ theta);
+radius = abs((distance-distance_shift) ./ theta);
 radius(radius>5000) = 5000;
 radius(radius<-5000) = -5000;
 
@@ -78,34 +84,12 @@ title('2走目')
 axis equal
 
 figure(2)
-% subplot(2, 1, 1)
 t = 0:radius_size-1;
-% hold on
 plot(t, abs(radius))
 title('半径')
 
-% subplot(2, 1, 2)
-% radius_f = medfilt1(radius, 30);
-% radius_f= lowpass(radius, 1e-5);
-
-t = 0:length(radius)-1;
-plot(t, abs(radius))
-title('半径 ')
-hold off
 
 figure(3)
 vel_table = vel_table(1:size(distance));
-% subplot(2, 1, 1)
-hold on
 t = 0:length(vel_table)-1;
 plot(t, vel_table)
-% ylim([0.9 1.8])
-% vel_table_med = medfilt1(vel_table, 20);
-% t = 0:length(vel_table)-1;
-% plot(t, vel_table_med)
-% hold off
-% subplot(2, 1, 2)
-% t = 0:length(distance2)-1;
-% plot(t, distance2)
-% hold off
-% ylim([0.9 1.8])
