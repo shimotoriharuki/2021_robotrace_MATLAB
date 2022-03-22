@@ -41,19 +41,36 @@ axis equal
 hold off
 
 % 円近似
-range = 20;
-r_store = [];
-
-figure(2)
-for i = 1 : size(distance) - range
-    [cxe,cye,re] = CircleFitting(X_sens(i : i + range), Y_sens(i : i + range));
+range1 = 10;
+r_store1 = [];
+for i = 1 : size(distance) - range1
+    [cxe, cye, re] = CircleFitting(X_sens(i : i + range1), Y_sens(i : i + range1));
     if re >= 5000
         re = 5000;
     end
-    r_store = [r_store, re];
+    r_store1 = [r_store1, re];
 end 
 
-plot(1:length(r_store), r_store)
+range2 = 20;
+r_store2 = [];
+for i = 1 : size(distance) - range2
+    [cxe, cye, re] = CircleFitting(X_sens(i : i + range2), Y_sens(i : i + range2));
+    if re >= 5000
+        re = 5000;
+    end
+    r_store2 = [r_store2, re];
+end 
+
+%shift
+r_store1 = circshift(r_store1, range1);
+r_store2 = circshift(r_store2, range2);
+
+figure(2)
+hold on
+plot(1 : length(r_store1), r_store1, 'b')
+plot(1 : length(r_store2), r_store2, 'r')
+legend('range: 10', 'range; 20')
+hold off
 
 % ↓ Reference：https://myenigma.hatenablog.com/entry/2015/09/07/214600
 function [ cx, cy, r ] = CircleFitting(x,y)
