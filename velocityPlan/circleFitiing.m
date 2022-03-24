@@ -2,8 +2,8 @@ clf
 clear
 clc
 
-distance = load("COURSLOG/DISTANCE.txt");
-theta = load("COURSLOG/THETA.txt");
+distance = load("japan/COURSLOG/DISTANCE.txt");
+theta = load("japan/COURSLOG/THETA.txt");
 
 % データが有るところだけ抽出
 distance = nonzeros(distance); %mm
@@ -20,8 +20,10 @@ pivot_lenght = 85; %mm
 X_sens = [];
 Y_sens = [];
 for i = 1:size(distance)
-    x = x + (distance(i) - pre_distance) * cos(th + theta(i)/2);
-    y = y + (distance(i) - pre_distance) * sin(th + theta(i)/2);
+%     x = x + (distance(i) - pre_distance) * cos(th + theta(i)/2);
+%     y = y + (distance(i) - pre_distance) * sin(th + theta(i)/2);
+    x = x + (distance(i)) * cos(th + theta(i)/2);
+    y = y + (distance(i)) * sin(th + theta(i)/2);
     th = th + theta(i);
     X = [X x];
     Y = [Y y];
@@ -37,11 +39,13 @@ hold on
 scatter(X, Y, 5, 'b') % 生データ
 scatter(X_sens, Y_sens, 10, 'r') % 補正後データ
 title('1走目')
-axis equal
-hold off
+% axis equal
+xlim([-3000 1600])
+ylim([-100 6500])
+% hold off
 
 % 円近似1
-range1 = 15;
+range1 = 100;
 r_store1 = [];
 for i = 1 : size(distance) - range1
     [cxe, cye, re] = CircleFitting(X_sens(i : i + range1), Y_sens(i : i + range1));
@@ -49,24 +53,34 @@ for i = 1 : size(distance) - range1
         re = 5000;
     end
     r_store1 = [r_store1, re];
+    if rem(i, 1) == 0
+        theta=[0:0.1:2*pi 0];
+        xe=re*cos(theta)+cxe;
+        ye=re*sin(theta)+cye;
+        p = plot(xe,ye,'-b');hold on;
+        drawnow;
+        hold on;    
+    end
+    delete(p)
 end 
 
 % 円近似2
 range2 = 20;
 r_store2 = [];
-for i = 1 : size(distance) - range2
-    [cxe, cye, re] = CircleFitting(X_sens(i : i + range2), Y_sens(i : i + range2));
-    if re >= 5000
-        re = 5000;
-    end
-    r_store2 = [r_store2, re];
-end 
+% for i = 1 : size(distance) - range2
+%     [cxe, cye, re] = CircleFitting(X_sens(i : i + range2), Y_sens(i : i + range2));
+%     if re >= 5000
+%         re = 5000;
+%     end
+%     r_store2 = [r_store2, re];
+% end 
 
 % 今までの方法
 theta(theta == 0) = 0.00001;
 cir_distance = circshift(distance, 1);
 cir_distance(1) = 0;
-delta_distance = distance - cir_distance;
+% delta_distance = distance - cir_distance;
+delta_distance = distance;
 radius = abs(delta_distance ./ theta);
 radius(radius > 5000) = 5000;
 
@@ -77,7 +91,7 @@ r_store2 = circshift(r_store2, range2);
 figure(2)
 hold on
 plot(1 : length(r_store1), r_store1, 'blue')
-plot(1 : length(r_store2), r_store2, 'red')
+% plot(1 : length(r_store2), r_store2, 'red')
 plot(1 : length(radius), radius, 'black')
 legend('Circle Fitting range: 10', 'Circle Fitting range; 20', 'Original way')
 hold off
