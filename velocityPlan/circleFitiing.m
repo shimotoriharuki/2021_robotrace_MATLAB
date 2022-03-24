@@ -40,12 +40,12 @@ scatter(X, Y, 5, 'b') % 生データ
 scatter(X_sens, Y_sens, 10, 'r') % 補正後データ
 title('1走目')
 % axis equal
-xlim([-3000 1600])
+xlim([-3000 1700])
 ylim([-100 6500])
 % hold off
 
 % 円近似1
-range1 = 100;
+range1 = 10;
 r_store1 = [];
 for i = 1 : size(distance) - range1
     [cxe, cye, re] = CircleFitting(X_sens(i : i + range1), Y_sens(i : i + range1));
@@ -112,7 +112,7 @@ G=[-sum(x.^3+x.*y.^2);
    -sum(x.^2.*y+y.^3);
    -sum(x.^2+y.^2)];
 
-T=F\G;
+T = F\G;
 
 cx=T(1)/-2;
 cy=T(2)/-2;
