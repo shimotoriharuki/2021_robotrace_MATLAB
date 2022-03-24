@@ -48,20 +48,23 @@ ylim([-100 6500])
 range1 = 10;
 r_store1 = [];
 for i = 1 : size(distance) - range1
+
     [cxe, cye, re] = CircleFitting(X_sens(i : i + range1), Y_sens(i : i + range1));
+    
     if re >= 5000
         re = 5000;
     end
     r_store1 = [r_store1, re];
-    if rem(i, 1) == 0
+    if rem(i, 10) == 0
         theta=[0:0.1:2*pi 0];
         xe=re*cos(theta)+cxe;
         ye=re*sin(theta)+cye;
         p = plot(xe,ye,'-b');hold on;
         drawnow;
-        hold on;    
+        hold on;   
+        delete(p)
     end
-    delete(p)
+    
 end 
 
 % 円近似2
@@ -112,10 +115,17 @@ G=[-sum(x.^3+x.*y.^2);
    -sum(x.^2.*y+y.^3);
    -sum(x.^2+y.^2)];
 
-T = F\G;
+if rcond(F) < 4.0e-15
+    r = 5000;
+    cx = 0;
+    cy = 0;
+else
+    T = F\G;
+    cx=T(1)/-2;
+    cy=T(2)/-2;
+    r=sqrt(cx^2+cy^2-T(3));
+end
 
-cx=T(1)/-2;
-cy=T(2)/-2;
-r=sqrt(cx^2+cy^2-T(3));
+
 
 end
