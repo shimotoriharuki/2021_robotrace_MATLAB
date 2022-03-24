@@ -40,8 +40,8 @@ title('1走目')
 axis equal
 hold off
 
-% 円近似
-range1 = 10;
+% 円近似1
+range1 = 15;
 r_store1 = [];
 for i = 1 : size(distance) - range1
     [cxe, cye, re] = CircleFitting(X_sens(i : i + range1), Y_sens(i : i + range1));
@@ -51,6 +51,7 @@ for i = 1 : size(distance) - range1
     r_store1 = [r_store1, re];
 end 
 
+% 円近似2
 range2 = 20;
 r_store2 = [];
 for i = 1 : size(distance) - range2
@@ -61,15 +62,24 @@ for i = 1 : size(distance) - range2
     r_store2 = [r_store2, re];
 end 
 
+% 今までの方法
+theta(theta == 0) = 0.00001;
+cir_distance = circshift(distance, 1);
+cir_distance(1) = 0;
+delta_distance = distance - cir_distance;
+radius = abs(delta_distance ./ theta);
+radius(radius > 5000) = 5000;
+
 %shift
 r_store1 = circshift(r_store1, range1);
 r_store2 = circshift(r_store2, range2);
 
 figure(2)
 hold on
-plot(1 : length(r_store1), r_store1, 'b')
-plot(1 : length(r_store2), r_store2, 'r')
-legend('range: 10', 'range; 20')
+plot(1 : length(r_store1), r_store1, 'blue')
+plot(1 : length(r_store2), r_store2, 'red')
+plot(1 : length(radius), radius, 'black')
+legend('Circle Fitting range: 10', 'Circle Fitting range; 20', 'Original way')
 hold off
 
 % ↓ Reference：https://myenigma.hatenablog.com/entry/2015/09/07/214600
