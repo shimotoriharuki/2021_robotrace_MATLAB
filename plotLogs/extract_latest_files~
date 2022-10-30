@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#find first_run_crossline_distances* | sed -n '$p'
+#cp current_velocitys0.txt /c/Users/under/\!UnderBirdWorkspace/MATLAB/2021RoboTrace/plotLogs/TEST/current_velocitys0.txt
+find TEST/ -name first_run_crossline* | sed -n '$p' | xargs -i cp -p {} mv_test/
+
+

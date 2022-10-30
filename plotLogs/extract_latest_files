@@ -1,0 +1,5 @@
+#!/bin/bash
+
+find TEST/ -name first_run_crossline* | sed -n '$p' | xargs -i cp -p {} mv_test/
+
+
