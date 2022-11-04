@@ -9,6 +9,8 @@ first_run_thetas = load('workingDirectory/first_run_thetas.txt');
 % --- データが有るところだけ抽出---
 first_run_distances = nonzeros(first_run_distances); %mm
 first_run_thetas = first_run_thetas(1 : size(first_run_distances)); %rad
+% first_run_thetas = first_run_thetas * 1.1;
+
 
 % ---コースの形状をプロット---
 x = 0;
@@ -16,9 +18,10 @@ y = 0;
 th = 0;
 X = zeros(size(first_run_distances));
 Y = zeros(size(first_run_distances));
+pre_theta = 0;
 for i = 1:size(first_run_distances)
-    x = x + (first_run_distances(i)) * cos(th + first_run_thetas(i)/2);
-    y = y + (first_run_distances(i)) * sin(th + first_run_thetas(i)/2);
+    x = x + first_run_distances(i) * cos(th + first_run_thetas(i)/2);
+    y = y + first_run_distances(i) * sin(th + first_run_thetas(i)/2);
 
     th = th + first_run_thetas(i);
     X(i) = x;
@@ -26,7 +29,7 @@ for i = 1:size(first_run_distances)
 
 end
 
-s = subplot(2, 1, 1)
+% s = subplot(2, 1, 1);
 scatter(X, Y, 10)
 title('1走目')
 axis equal

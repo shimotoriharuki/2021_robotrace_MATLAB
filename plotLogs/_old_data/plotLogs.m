@@ -1,10 +1,15 @@
 clf
 clear
-distance = load("COURSLOG/DISTANCE.txt");
-theta = load("COURSLOG/THETA.txt");
-distance2 = load("COURSLOG/DISTANC2.txt");
-theta2 = load("COURSLOG/THETA2.txt");
-vel_table = load("COURSLOG/VELTABLE.TXT");
+% distance = load("COURSLOG/DISTANCE.txt");
+% theta = load("COURSLOG/THETA.txt");
+% distance2 = load("COURSLOG/DISTANC2.txt");
+% theta2 = load("COURSLOG/THETA2.txt");
+% vel_table = load("COURSLOG/VELTABLE.TXT");
+distance = load("student/DISTANCE.txt");
+theta = load("student/THETA.txt");
+distance2 = load("student/DISTANC2.txt");
+theta2 = load("student/THETA2.txt");
+vel_table = load("student/VELTABLE.TXT");
 
 
 % データが有るところだけ抽出
