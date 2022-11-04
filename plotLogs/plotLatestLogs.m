@@ -21,13 +21,15 @@ first_run_thetas = first_run_thetas * 0.96;
 
 
 % ---コースの形状をプロット---
-
 % subplot(2, 1, 1);
+figure(1)
 plotCourseInformation(first_run_distances, first_run_thetas, first_run_sideline_distances, first_run_crossline_distances);
 title('1走目')
 
-
 axis equal
+
+figure(2)
+plotRadius(first_run_distances, first_run_thetas);
 
 
 function plotCourseInformation(distances, thetas, sidelines, crosslines)
@@ -77,7 +79,7 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     
     end
     hold on
-    scatter(positions(:, 1), positions(:, 2)); % コースををプロット
+    scatter(positions(:, 1), positions(:, 2)); % コースをプロット
 
     crossline_nums = 1 : length(crossline_positions(:, 1));
     scatter(crossline_positions(: ,1), crossline_positions(:, 2), 300, "red", "x", "LineWidth", 2); % クロスラインをプロット
@@ -88,5 +90,16 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     text(sideline_positions(: ,1) + 50, sideline_positions(:, 2) + 50, string(sideline_nums), "Color", "m");
 
     hold off
+end
+
+function plotRadius(distances, thetas)
+    t = 1 : length(distances);
+    radius = abs(distances ./ thetas);
+    radius(radius >= 5000) = 5000;
+%     radius(radius <= -5000) = -5000;
+    
+    plot(t, radius);
+    ylim([0, 5500])
+
 end
  
