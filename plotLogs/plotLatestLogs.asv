@@ -1,0 +1,66 @@
+clc
+clear
+clf
+
+% ---データをロード---
+first_run_distances = load('workingDirectory/first_run_distances.txt');
+first_run_thetas = load('workingDirectory/first_run_thetas.txt');
+first_run_sideline_distances = load('workingDirectory/first_run_sideline_distances.txt');
+first_run_crossline_distances = load('workingDirectory/first_run_crossline_distances.txt');
+
+% second_run_distances = load('workingDirectory/second_run_distances.txt');
+% second_run_thetas = load('workingDirectory/second_run_thetas.txt');
+
+% --- データが有るところだけ抽出---
+first_run_distances = nonzeros(first_run_distances); %mm
+first_run_thetas = first_run_thetas(1 : size(first_run_distances)); %rad
+% first_run_thetas = first_run_thetas * 1.1;
+
+
+% ---コースの形状をプロット---
+
+subplot(2, 1, 1);
+plotCourseInformation(first_run_distances, first_run_thetas, first_run_sideline_distances, first_run_crossline_distances);
+title('1走目')
+
+
+axis equal
+
+
+function plotCourseInformation(distances, thetas, sidelines, crosslines)
+    x = 0;
+    y = 0;
+    th = 0;
+    total_distance = 0;
+
+    x_positions = zeros(size(distances));
+    y_positions = zeros(size(distances));
+    positions = [zeros(size(distances)), zeros(size(distances))];
+    sideline_positions = zeros(size(sidelines));
+    crossline_positions = [zeros(size(crosslines)), zeros(size(crosslines))];
+    sideline_idx = 1;
+    crossline_idx = 1;
+
+    for i = 1:size(distances)
+        x = x + (distances(i)) * cos(th + thetas(i)/2);
+        y = y + (distances(i)) * sin(th + thetas(i)/2);
+    
+        th = th + thetas(i);
+        positions
+
+        if total_distance >= crosslines(crossline_idx)
+            crossline_positions(crossline_idx, :) = [x, y];
+
+            if crossline_idx <= size(crossline_positions)
+                crossline_idx = crossline_idx + 1;
+            end
+        end
+
+        total_distance = total_distance + distances(i);
+    
+    end
+    hold on
+    scatter(x_positions, y_positions);
+    scatter(crossline_positions(1, :), crossline_positions(2, :));
+    hold off
+end
