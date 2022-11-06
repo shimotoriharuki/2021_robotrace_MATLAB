@@ -10,23 +10,32 @@ first_run_distances = load('workingDirectory/first_run_distances.txt');
 first_run_thetas = load('workingDirectory/first_run_thetas.txt');
 first_run_sideline_distances = load('workingDirectory/first_run_sideline_distances.txt');
 first_run_crossline_distances = load('workingDirectory/first_run_crossline_distances.txt');
+first_run_total_distances = load('workingDirectory/first_total_distances.txt');
+
 
 second_run_distances = load('workingDirectory/second_run_distances.txt');
 second_run_thetas = load('workingDirectory/second_run_thetas.txt');
 second_run_sideline_distances = load('workingDirectory/second_run_sideline_distances.txt');
 second_run_crossline_distances = load('workingDirectory/second_run_crossline_distances.txt');
+second_velocity_table = load('workingDirectory/second_velocity_table.txt');
+second_run_total_distances = load('workingDirectory/second_total_distances.txt');
 
 % --- データが有るところだけ抽出---
 first_run_distances = nonzeros(first_run_distances); %mm
 first_run_thetas = first_run_thetas(1 : size(first_run_distances)); %rad
 first_run_sideline_distances = nonzeros(first_run_sideline_distances); %mm
 first_run_crossline_distances = nonzeros(first_run_crossline_distances); %mm
+first_run_total_distances = nonzeros(first_run_total_distances); %mm
 % first_run_thetas = first_run_thetas * 0.96;
 
 second_run_distances = nonzeros(second_run_distances); %mm
 second_run_thetas = second_run_thetas(1 : size(second_run_distances)); %rad
 second_run_sideline_distances = nonzeros(second_run_sideline_distances); %mm
 second_run_crossline_distances = nonzeros(second_run_crossline_distances); %mm
+second_velocity_table = nonzeros(second_velocity_table); %m/s
+second_run_total_distances = nonzeros(second_run_total_distances); %mm
+
+
 % second_run_thetas = second_run_thetas * 0.96;
 
 
@@ -43,9 +52,21 @@ title('2走目')
 % axis equal
 
 figure(2);
-subplot();
+subplot(2, 1, 1);
 plotRadius(first_run_distances, first_run_thetas);
+title('radius')
 
+subplot(2, 1, 2);
+plotdTheta(first_run_distances, first_run_thetas);
+title('dtheta')
+
+figure(3)
+plotVelocityTable(second_velocity_table);
+title('Velocity tabele')
+
+figure(4)
+plotTotalDistanceDiff(first_run_total_distances, second_run_total_distances);
+title('トータル距離の違い')
 
 function plotCourseInformation(distances, thetas, sidelines, crosslines)
     x = 0;
@@ -53,11 +74,14 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     th = 0;
     total_distance = 0;
 
-    positions = [zeros(size(distances)), zeros(size(distances))];
+    robot_positions = [zeros(size(distances)), zeros(size(distances))];
+    sensor_positions = [zeros(size(distances)), zeros(size(distances))];
     sideline_positions = [zeros(size(sidelines)), zeros(size(sidelines))];
     crossline_positions = [zeros(size(crosslines)), zeros(size(crosslines))];
     sideline_idx = 1;
     crossline_idx = 1;
+
+    pivot_lenght = 110; %mm
 
     % コース情報をプロット
     for i = 1:size(distances)
@@ -66,7 +90,9 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
         y = y + (distances(i)) * sin(th + thetas(i)/2);
     
         th = th + thetas(i);
-        positions(i, :) = [x, y];
+        robot_positions(i, :) = [x, y];
+        sensor_positions(i, :) = [x + pivot_lenght * cos(th), y + pivot_lenght * sin(th)];
+
 
         % サイドラインの位置を計算
         if total_distance + 10 >= sidelines(sideline_idx) && sidelines(sideline_idx) >= total_distance - 10
@@ -94,7 +120,9 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     
     end
     hold on
-    scatter(positions(:, 1), positions(:, 2)); % コースをプロット
+    scatter(robot_positions(:, 1), robot_positions(:, 2), 6); % ロボットの中心の走行経路をプロット
+    scatter(sensor_positions(:, 1), sensor_positions(:, 2), 6); % センサーの走行経路をプロット
+
 
     crossline_nums = 1 : length(crossline_positions(:, 1));
     scatter(crossline_positions(: ,1), crossline_positions(:, 2), 300, "red", "x", "LineWidth", 2); % クロスラインをプロット
@@ -108,6 +136,8 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
 end
 
 function plotRadius(distances, thetas)
+    thetas(thetas == 0) = 0.00001;
+
     t = 1 : length(distances);
     radius = abs(distances ./ thetas);
     radius(radius >= 5000) = 5000;
@@ -116,4 +146,22 @@ function plotRadius(distances, thetas)
     ylim([0, 5500])
 
 end
- 
+
+function plotdTheta(distances, thetas)
+    thetas(thetas == 0) = 0.00001;
+
+    t = 1 : length(distances);
+    dtheta = abs(thetas ./ distances);
+    
+    plot(t, dtheta);
+%     ylim([0, 5500])
+
+end 
+
+function plotVelocityTable(velocity_table)
+    plot(1 : length(velocity_table), velocity_table);
+end
+
+function plotTotalDistanceDiff(data1, data2)
+    plot(1:length(data1), data1, 1:length(data2), data2)
+end

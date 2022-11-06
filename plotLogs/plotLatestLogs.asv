@@ -1,7 +1,7 @@
 f1 = figure(1);
-f2 = figure(2);
+% f2 = figure(2);
 clf (f1, "reset")
-clf (f2, "reset")
+% clf (f2, "reset")
 clc
 clear
 
@@ -31,12 +31,12 @@ second_run_crossline_distances = nonzeros(second_run_crossline_distances); %mm
 
 
 % ---コースの形状をプロット---
-subplot(1, 2, 1);
-f1 = figure(1);
+subplot(2, 1, 1);
+figure(1);
 plotCourseInformation(first_run_distances, first_run_thetas, first_run_sideline_distances, first_run_crossline_distances);
 title('1走目')
 
-f1 = subplot(1, 2, 2);
+subplot(2, 1, 2);
 plotCourseInformation(second_run_distances, second_run_thetas, second_run_sideline_distances, second_run_crossline_distances);
 title('2走目')
 
@@ -53,11 +53,14 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     th = 0;
     total_distance = 0;
 
-    positions = [zeros(size(distances)), zeros(size(distances))];
+    robot_positions = [zeros(size(distances)), zeros(size(distances))];
+    sensor_positions = [zeros(size(distances)), zeros(size(distances))];
     sideline_positions = [zeros(size(sidelines)), zeros(size(sidelines))];
     crossline_positions = [zeros(size(crosslines)), zeros(size(crosslines))];
     sideline_idx = 1;
     crossline_idx = 1;
+
+    pivot_lenght = 110; %mm
 
     % コース情報をプロット
     for i = 1:size(distances)
@@ -66,7 +69,9 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
         y = y + (distances(i)) * sin(th + thetas(i)/2);
     
         th = th + thetas(i);
-        positions(i, :) = [x, y];
+        robot_positions(i, :) = [x, y];
+        sensor_positions(i, :) = [x + pivot_lenght * cos(th), y + pivot_lenght * sin(th)];
+
 
         % サイドラインの位置を計算
         if total_distance + 10 >= sidelines(sideline_idx) && sidelines(sideline_idx) >= total_distance - 10
@@ -94,7 +99,9 @@ function plotCourseInformation(distances, thetas, sidelines, crosslines)
     
     end
     hold on
-    scatter(positions(:, 1), positions(:, 2)); % コースをプロット
+    scatter(robot_positions(:, 1), robot_positions(:, 2)); % ロボットの中心の走行経路をプロット
+    scatter(sensor_positions(:, 1), sensor_positions(:, 2)); % センサーの走行経路をプロット
+
 
     crossline_nums = 1 : length(crossline_positions(:, 1));
     scatter(crossline_positions(: ,1), crossline_positions(:, 2), 300, "red", "x", "LineWidth", 2); % クロスラインをプロット
@@ -111,7 +118,6 @@ function plotRadius(distances, thetas)
     t = 1 : length(distances);
     radius = abs(distances ./ thetas);
     radius(radius >= 5000) = 5000;
-%     radius(radius <= -5000) = -5000;
     
     plot(t, radius);
     ylim([0, 5500])
