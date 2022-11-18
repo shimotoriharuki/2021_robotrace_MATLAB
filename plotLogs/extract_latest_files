@@ -32,27 +32,38 @@ find /f/TEST/ -name first_run_crossline_distances* | sed -n '$p' | xargs -i cp -
 find /f/TEST/ -name first_run_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/first_run_distances.txt 
 find /f/TEST/ -name first_run_sideline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/first_run_sideline_distances.txt 
 find /f/TEST/ -name first_run_thetas* | sed -n '$p' | xargs -i cp -p {} workingDirectory/first_run_thetas.txt 
+find /f/TEST/ -name first_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/first_run_total_distances.txt 
 
 find /f/TEST/ -name second_run_crossline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_run_crossline_distances.txt 
 find /f/TEST/ -name second_run_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_run_distances.txt 
 find /f/TEST/ -name second_run_sideline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_run_sideline_distances.txt 
 find /f/TEST/ -name second_run_thetas* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_run_thetas.txt 
 find /f/TEST/ -name second_velocity_table* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_velocity_table.txt 
+find /f/TEST/ -name second_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/second_run_total_distances.txt 
 
 find /f/TEST/ -name third_run_crossline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_run_crossline_distances.txt 
 find /f/TEST/ -name third_run_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_run_distances.txt 
 find /f/TEST/ -name third_run_sideline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_run_sideline_distances.txt 
 find /f/TEST/ -name third_run_thetas* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_run_thetas.txt 
 find /f/TEST/ -name third_velocity_table* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_velocity_table.txt 
+find /f/TEST/ -name third_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/third_run_total_distances.txt 
 
 find /f/TEST/ -name fourth_run_crossline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_run_crossline_distances.txt 
 find /f/TEST/ -name fourth_run_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_run_distances.txt 
 find /f/TEST/ -name fourth_run_sideline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_run_sideline_distances.txt 
 find /f/TEST/ -name fourth_run_thetas* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_run_thetas.txt 
 find /f/TEST/ -name fourth_velocity_table* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_velocity_table.txt 
+find /f/TEST/ -name fourth_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fourth_run_total_distances.txt 
 
 find /f/TEST/ -name fifth_run_crossline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_crossline_distances.txt 
 find /f/TEST/ -name fifth_run_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_distances.txt 
 find /f/TEST/ -name fifth_run_sideline_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_sideline_distances.txt 
 find /f/TEST/ -name fifth_run_thetas* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_thetas.txt 
 find /f/TEST/ -name fifth_velocity_table* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_velocity_table.txt 
+find /f/TEST/ -name fifth_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_total_distances.txt 
+
+
+find /f/DEBUG/ -name rotation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/rotation_ratio.txt 
+find /f/DEBUG/ -name translation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/translation_ratio.txt 
+find /f/DEBUG/ -name current_velocity* | sed -n '$p' | xargs -i cp -p {} workingDirectory/current_velocity.txt 
+find /f/DEBUG/ -name velocity_response* | sed -n '$p' | xargs -i cp -p {} workingDirectory/velocity_response.txt 
