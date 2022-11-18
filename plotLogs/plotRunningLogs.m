@@ -40,9 +40,12 @@ fifth_run_crossline_distances = load('workingDirectory/fifth_run_crossline_dista
 fifth_velocity_table = load('workingDirectory/fifth_velocity_table.txt');
 fifth_run_total_distances = load('workingDirectory/fifth_run_total_distances.txt');
 
-degub_data1 = load('workingDirectory/translation_ratio.txt');
-degub_data2 = load('workingDirectory/rotation_ratio.txt');
-degub_data3 = load('workingDirectory/current_velocity.txt');
+% degub_data1 = load('workingDirectory/translation_ratio.txt');
+% degub_data2 = load('workingDirectory/rotation_ratio.txt');
+% degub_data3 = load('workingDirectory/current_velocity.txt');
+
+current_velocity = load('workingDirectory/current_velocity.txt');
+target_velocity = load('workingDirectory/target_velocity.txt');
 
 
 % --- データが有るところだけ抽出---
@@ -57,7 +60,7 @@ second_run_distances = nonzeros(second_run_distances); %mm
 second_run_thetas = second_run_thetas(1 : size(second_run_distances)); %rad
 second_run_sideline_distances = nonzeros(second_run_sideline_distances); %mm
 second_run_crossline_distances = nonzeros(second_run_crossline_distances); %mm
-second_velocity_table = second_velocity_table(1 : size(second_run_distances)); %rad
+second_velocity_table = nonzeros(second_velocity_table); 
 second_run_total_distances = nonzeros(second_run_total_distances); %mm
 % second_run_thetas = second_run_thetas * 0.96;
 
@@ -65,7 +68,7 @@ third_run_distances = nonzeros(third_run_distances); %mm
 third_run_thetas = third_run_thetas(1 : size(third_run_distances)); %rad
 third_run_sideline_distances = nonzeros(third_run_sideline_distances); %mm
 third_run_crossline_distances = nonzeros(third_run_crossline_distances); %mm
-third_velocity_table = third_velocity_table(1 : size(third_run_distances)); %rad
+third_velocity_table = nonzeros(third_velocity_table); 
 third_run_total_distances = nonzeros(third_run_total_distances); %mm
 % third_run_thetas = third_run_thetas * 0.96;
 
@@ -73,7 +76,7 @@ fourth_run_distances = nonzeros(fourth_run_distances); %mm
 fourth_run_thetas = fourth_run_thetas(1 : size(fourth_run_distances)); %rad
 fourth_run_sideline_distances = nonzeros(fourth_run_sideline_distances); %mm
 fourth_run_crossline_distances = nonzeros(fourth_run_crossline_distances); %mm
-fourth_velocity_table = fourth_velocity_table(1 : size(fourth_run_distances)); %rad
+fourth_velocity_table = nonzeros(fourth_velocity_table); 
 fourth_run_total_distances = nonzeros(fourth_run_total_distances); %mm
 % fourth_run_thetas = fourth_run_thetas * 0.96;
 
@@ -81,12 +84,14 @@ fifth_run_distances = nonzeros(fifth_run_distances); %mm
 fifth_run_thetas = fifth_run_thetas(1 : size(fifth_run_distances)); %rad
 fifth_run_sideline_distances = nonzeros(fifth_run_sideline_distances); %mm
 fifth_run_crossline_distances = nonzeros(fifth_run_crossline_distances); %mm
-fifth_velocity_table = fifth_velocity_table(1 : size(fifth_run_distances)); %rad
+fifth_velocity_table = nonzeros(fifth_velocity_table); 
 fifth_run_total_distances = nonzeros(fifth_run_total_distances); %mm
 % fifth_run_thetas = fifth_run_thetas * 0.96;
 
-degub_data1 = nonzeros(degub_data1); 
-degub_data2 = degub_data2(1:length(degub_data1));
+% degub_data1 = nonzeros(degub_data1); 
+% degub_data2 = degub_data2(1:length(degub_data1));
+current_velocity = nonzeros(current_velocity); 
+target_velocity = target_velocity(1:length(current_velocity));
 
 % ---コースの形状をプロット---
 % subplot(2, 1, 1);
@@ -144,29 +149,32 @@ plotTotalDistanceDiff(first_run_total_distances, second_run_total_distances);
 title('トータル距離の違い')
 
 figure(6)
-plot(1:length(degub_data1), degub_data1, 'LineWidth', 3)
-hold on
-plot(1:length(degub_data2), degub_data2)
-hold off
-legend('translation', 'rotaion')
-title('汎用デバッグデータ')
-
-total_ratio_l = degub_data1 + degub_data2;
-total_ratio_r = degub_data1 - degub_data2;
-
-figure(7)
-plot(1:length(total_ratio_l), total_ratio_l, 'LineWidth', 3)
-legend('total ratio l')
-
-hold on
-plot(1:length(total_ratio_r), total_ratio_r)
-title('soiya')
-legend('tota ratio r')
-hold off
+% plot(1:length(degub_data1), degub_data1, 'LineWidth', 3)
+% hold on
+% plot(1:length(degub_data2), degub_data2)
+% hold off
+% legend('translation', 'rotaion')
+% title('汎用デバッグデータ')
+% 
+% total_ratio_l = degub_data1 + degub_data2;
+% total_ratio_r = degub_data1 - degub_data2;
+% 
+% figure(7)
+% plot(1:length(total_ratio_l), total_ratio_l, 'LineWidth', 3)
+% legend('total ratio l')
+% 
+% hold on
+% plot(1:length(total_ratio_r), total_ratio_r)
+% title('soiya')
+% legend('tota ratio r')
+% hold off
 
 figure(8)
-plot(1:length(degub_data3), degub_data3)
-legend('current_velocity')
+plot(1:length(current_velocity), current_velocity)
+hold on
+plot(1:length(target_velocity), target_velocity)
+hold off
+legend('速度追従')
 
 % ylim([-1800, 1800])
 

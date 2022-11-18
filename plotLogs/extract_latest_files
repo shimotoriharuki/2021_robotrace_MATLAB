@@ -63,7 +63,8 @@ find /f/TEST/ -name fifth_velocity_table* | sed -n '$p' | xargs -i cp -p {} work
 find /f/TEST/ -name fifth_run_total_distances* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_total_distances.txt 
 
 
-find /f/DEBUG/ -name rotation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/rotation_ratio.txt 
-find /f/DEBUG/ -name translation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/translation_ratio.txt 
+#find /f/DEBUG/ -name rotation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/rotation_ratio.txt 
+#find /f/DEBUG/ -name translation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/translation_ratio.txt 
 find /f/DEBUG/ -name current_velocity* | sed -n '$p' | xargs -i cp -p {} workingDirectory/current_velocity.txt 
-find /f/DEBUG/ -name velocity_response* | sed -n '$p' | xargs -i cp -p {} workingDirectory/velocity_response.txt 
+#find /f/DEBUG/ -name velocity_response* | sed -n '$p' | xargs -i cp -p {} workingDirectory/velocity_response.txt 
+find /f/DEBUG/ -name target_velocity* | sed -n '$p' | xargs -i cp -p {} workingDirectory/target_velocity.txt 
