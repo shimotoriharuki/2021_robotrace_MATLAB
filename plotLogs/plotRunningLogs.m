@@ -1,7 +1,7 @@
 f1 = figure(1);
-% f2 = figure(2);
+f2 = figure(2);
 clf (f1, "reset")
-% clf (f2, "reset")
+clf (f2, "reset")
 clc
 clear
 
@@ -145,8 +145,18 @@ plotVelocityTable(fifth_velocity_table);
 title('Fifth Velocity tabele')
 
 figure(5)
+subplot(2, 2, 1);
 plotTotalDistanceDiff(first_run_total_distances, second_run_total_distances);
-title('トータル距離の違い')
+title('トータル距離の違い 1st vs 2nd')
+subplot(2, 2, 2);
+plotTotalDistanceDiff(first_run_total_distances, third_run_total_distances);
+title('トータル距離の違い 1st vs 3rd')
+subplot(2, 2, 3);
+plotTotalDistanceDiff(first_run_total_distances, fourth_run_total_distances);
+title('トータル距離の違い 1st vs 4th')
+subplot(2, 2, 4);
+plotTotalDistanceDiff(first_run_total_distances, fifth_run_total_distances);
+title('トータル距離の違い 1st vs 5th')
 
 figure(6)
 % plot(1:length(degub_data1), degub_data1, 'LineWidth', 3)
