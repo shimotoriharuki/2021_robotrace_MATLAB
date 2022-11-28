@@ -54,7 +54,7 @@ first_run_thetas = first_run_thetas(1 : size(first_run_distances)); %rad
 first_run_sideline_distances = nonzeros(first_run_sideline_distances); %mm
 first_run_crossline_distances = nonzeros(first_run_crossline_distances); %mm 
 first_run_total_distances = nonzeros(first_run_total_distances); %mm
-% first_run_thetas = first_run_thetas * 0.96;
+% first_run_thetas = first_run_thetas * 1.07;
 
 second_run_distances = nonzeros(second_run_distances); %mm
 second_run_thetas = second_run_thetas(1 : size(second_run_distances)); %rad
