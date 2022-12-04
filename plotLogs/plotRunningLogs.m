@@ -11,8 +11,8 @@ first_run_thetas = load('workingDirectory/first_run_thetas.txt');
 first_run_sideline_distances = load('workingDirectory/first_run_sideline_distances.txt');
 first_run_crossline_distances = load('workingDirectory/first_run_crossline_distances.txt');
 first_run_total_distances = load('workingDirectory/first_run_total_distances.txt');
-% first_run_current_velocity = load('workingDirectory/first_run_current_velocity.txt');
-% first_run_target_velocity = load('workingDirectory/first_run_target_velocity.txt');
+first_run_current_velocity = load('workingDirectory/first_run_current_velocity.txt');
+first_run_target_velocity = load('workingDirectory/first_run_target_velocity.txt');
 
 second_run_distances = load('workingDirectory/second_run_distances.txt');
 second_run_thetas = load('workingDirectory/second_run_thetas.txt');
@@ -20,8 +20,8 @@ second_run_sideline_distances = load('workingDirectory/second_run_sideline_dista
 second_run_crossline_distances = load('workingDirectory/second_run_crossline_distances.txt');
 second_velocity_table = load('workingDirectory/second_velocity_table.txt');
 second_run_total_distances = load('workingDirectory/second_run_total_distances.txt');
-% second_run_current_velocity = load('workingDirectory/second_run_current_velocity.txt');
-% second_run_target_velocity = load('workingDirectory/second_run_target_velocity.txt');
+second_run_current_velocity = load('workingDirectory/second_run_current_velocity.txt');
+second_run_target_velocity = load('workingDirectory/second_run_target_velocity.txt');
 
 third_run_distances = load('workingDirectory/third_run_distances.txt');
 third_run_thetas = load('workingDirectory/third_run_thetas.txt');
@@ -29,8 +29,8 @@ third_run_sideline_distances = load('workingDirectory/third_run_sideline_distanc
 third_run_crossline_distances = load('workingDirectory/third_run_crossline_distances.txt');
 third_velocity_table = load('workingDirectory/third_velocity_table.txt');
 third_run_total_distances = load('workingDirectory/third_run_total_distances.txt');
-% third_run_current_velocity = load('workingDirectory/third_run_current_velocity.txt');
-% third_run_target_velocity = load('workingDirectory/third_run_target_velocity.txt');
+third_run_current_velocity = load('workingDirectory/third_run_current_velocity.txt');
+third_run_target_velocity = load('workingDirectory/third_run_target_velocity.txt');
 
 fourth_run_distances = load('workingDirectory/fourth_run_distances.txt');
 fourth_run_thetas = load('workingDirectory/fourth_run_thetas.txt');
@@ -38,8 +38,8 @@ fourth_run_sideline_distances = load('workingDirectory/fourth_run_sideline_dista
 fourth_run_crossline_distances = load('workingDirectory/fourth_run_crossline_distances.txt');
 fourth_velocity_table = load('workingDirectory/fourth_velocity_table.txt');
 fourth_run_total_distances = load('workingDirectory/fourth_run_total_distances.txt');
-% fourth_run_current_velocity = load('workingDirectory/fourth_run_current_velocity.txt');
-% fourth_run_target_velocity = load('workingDirectory/fourth_run_target_velocity.txt');
+fourth_run_current_velocity = load('workingDirectory/fourth_run_current_velocity.txt');
+fourth_run_target_velocity = load('workingDirectory/fourth_run_target_velocity.txt');
 
 fifth_run_distances = load('workingDirectory/fifth_run_distances.txt');
 fifth_run_thetas = load('workingDirectory/fifth_run_thetas.txt');
@@ -47,8 +47,8 @@ fifth_run_sideline_distances = load('workingDirectory/fifth_run_sideline_distanc
 fifth_run_crossline_distances = load('workingDirectory/fifth_run_crossline_distances.txt');
 fifth_velocity_table = load('workingDirectory/fifth_velocity_table.txt');
 fifth_run_total_distances = load('workingDirectory/fifth_run_total_distances.txt');
-% fifth_run_current_velocity = load('workingDirectory/fifth_run_current_velocity.txt');
-% fifth_run_target_velocity = load('workingDirectory/fifth_run_target_velocity.txt');
+fifth_run_current_velocity = load('workingDirectory/fifth_run_current_velocity.txt');
+fifth_run_target_velocity = load('workingDirectory/fifth_run_target_velocity.txt');
 
 % degub_data1 = load('workingDirectory/translation_ratio.txt');
 % degub_data2 = load('workingDirectory/rotation_ratio.txt');
@@ -64,8 +64,8 @@ first_run_thetas = first_run_thetas(1 : size(first_run_distances)); %rad
 first_run_sideline_distances = nonzeros(first_run_sideline_distances); %mm
 first_run_crossline_distances = nonzeros(first_run_crossline_distances); %mm 
 first_run_total_distances = nonzeros(first_run_total_distances); %mm
-% first_run_current_velocity = nonzeros(first_run_current_velocity); %m/s
-% first_run_target_velocity = first_run_target_velocity(1 : size(first_run_current_velocity)); %m/s
+first_run_current_velocity = nonzeros(first_run_current_velocity); %m/s
+first_run_target_velocity = first_run_target_velocity(1 : size(first_run_current_velocity)); %m/s
 % first_run_thetas = first_run_thetas * 1.07;
 
 second_run_distances = nonzeros(second_run_distances); %mm
@@ -74,8 +74,8 @@ second_run_sideline_distances = nonzeros(second_run_sideline_distances); %mm
 second_run_crossline_distances = nonzeros(second_run_crossline_distances); %mm
 second_velocity_table = nonzeros(second_velocity_table); 
 second_run_total_distances = nonzeros(second_run_total_distances); %mm
-% second_run_current_velocity = nonzeros(second_run_current_velocity); %m/s
-% second_run_target_velocity = second_run_target_velocity(1 : size(second_run_current_velocity)); %m/s
+second_run_current_velocity = nonzeros(second_run_current_velocity); %m/s
+second_run_target_velocity = second_run_target_velocity(1 : size(second_run_current_velocity)); %m/s
 % second_run_thetas = second_run_thetas * 0.96;
 
 third_run_distances = nonzeros(third_run_distances); %mm
@@ -84,8 +84,8 @@ third_run_sideline_distances = nonzeros(third_run_sideline_distances); %mm
 third_run_crossline_distances = nonzeros(third_run_crossline_distances); %mm
 third_velocity_table = nonzeros(third_velocity_table); 
 third_run_total_distances = nonzeros(third_run_total_distances); %mm
-% third_run_current_velocity = nonzeros(third_run_current_velocity); %m/s
-% third_run_target_velocity = third_run_target_velocity(1 : size(third_run_current_velocity)); %m/s
+third_run_current_velocity = nonzeros(third_run_current_velocity); %m/s
+third_run_target_velocity = third_run_target_velocity(1 : size(third_run_current_velocity)); %m/s
 % third_run_thetas = third_run_thetas * 0.96;
 
 fourth_run_distances = nonzeros(fourth_run_distances); %mm
@@ -94,8 +94,8 @@ fourth_run_sideline_distances = nonzeros(fourth_run_sideline_distances); %mm
 fourth_run_crossline_distances = nonzeros(fourth_run_crossline_distances); %mm
 fourth_velocity_table = nonzeros(fourth_velocity_table); 
 fourth_run_total_distances = nonzeros(fourth_run_total_distances); %mm
-% fourth_run_current_velocity = nonzeros(fourth_run_current_velocity); %m/s
-% fourth_run_target_velocity = fourth_run_target_velocity(1 : size(fourth_run_current_velocity)); %m/s
+fourth_run_current_velocity = nonzeros(fourth_run_current_velocity); %m/s
+fourth_run_target_velocity = fourth_run_target_velocity(1 : size(fourth_run_current_velocity)); %m/s
 % fourth_run_thetas = fourth_run_thetas * 0.96;
 
 fifth_run_distances = nonzeros(fifth_run_distances); %mm
@@ -104,8 +104,8 @@ fifth_run_sideline_distances = nonzeros(fifth_run_sideline_distances); %mm
 fifth_run_crossline_distances = nonzeros(fifth_run_crossline_distances); %mm
 fifth_velocity_table = nonzeros(fifth_velocity_table); 
 fifth_run_total_distances = nonzeros(fifth_run_total_distances); %mm
-% fifth_run_current_velocity = nonzeros(fifth_run_current_velocity); %m/s
-% fifth_run_target_velocity = fifth_run_target_velocity(1 : size(fifth_run_current_velocity)); %m/s
+fifth_run_current_velocity = nonzeros(fifth_run_current_velocity); %m/s
+fifth_run_target_velocity = fifth_run_target_velocity(1 : size(fifth_run_current_velocity)); %m/s
 % fifth_run_thetas = fifth_run_thetas * 0.96;
 
 % degub_data1 = nonzeros(degub_data1); 
@@ -178,7 +178,7 @@ subplot(2, 2, 4);
 plotTotalDistanceDiff(first_run_total_distances, fifth_run_total_distances);
 title('トータル距離の違い 1st vs 5th')
 
-figure(6)
+% figure(6)
 % plot(1:length(degub_data1), degub_data1, 'LineWidth', 3)
 % hold on
 % plot(1:length(degub_data2), degub_data2)
@@ -199,34 +199,34 @@ figure(6)
 % legend('tota ratio r')
 % hold off
 
-% figure(8)
-% subplot(2, 2, 1);
-% plot(1:length(second_run_current_velocity), second_run_current_velocity)
-% hold on
-% plot(1:length(second_run_target_velocity), second_run_target_velocity)
-% hold off
-% legend('2nd 速度追従')
-% 
-% subplot(2, 2, 2);
-% plot(1:length(third_run_current_velocity), third_run_current_velocity)
-% hold on
-% plot(1:length(third_run_target_velocity), third_run_target_velocity)
-% hold off
-% legend('3rd 速度追従')
-% 
-% subplot(2, 2, 1);
-% plot(1:length(fourth_run_current_velocity), fourth_run_current_velocity)
-% hold on
-% plot(1:length(fourth_run_target_velocity), fourth_run_target_velocity)
-% hold off
-% legend('4th 速度追従')
-% 
-% subplot(2, 2, 1);
-% plot(1:length(fifth_run_current_velocity), fifth_run_current_velocity)
-% hold on
-% plot(1:length(fifth_run_target_velocity), fifth_run_target_velocity)
-% hold off
-% legend('5th 速度追従')
+figure(8)
+subplot(2, 2, 1);
+plot(1:length(second_run_current_velocity), second_run_current_velocity)
+hold on
+plot(1:length(second_run_target_velocity), second_run_target_velocity)
+hold off
+legend('2nd 速度追従')
+
+subplot(2, 2, 2);
+plot(1:length(third_run_current_velocity), third_run_current_velocity)
+hold on
+plot(1:length(third_run_target_velocity), third_run_target_velocity)
+hold off
+legend('3rd 速度追従')
+
+subplot(2, 2, 3);
+plot(1:length(fourth_run_current_velocity), fourth_run_current_velocity)
+hold on
+plot(1:length(fourth_run_target_velocity), fourth_run_target_velocity)
+hold off
+legend('4th 速度追従')
+
+subplot(2, 2, 4);
+plot(1:length(fifth_run_current_velocity), fifth_run_current_velocity)
+hold on
+plot(1:length(fifth_run_target_velocity), fifth_run_target_velocity)
+hold off
+legend('5th 速度追従')
 
 function plotCourseInformation(distances, thetas, sidelines, crosslines)
     x = 0;
