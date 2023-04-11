@@ -1,0 +1,25 @@
+% ---データをロード---
+odometry_data = load('workingDirectory/odometry_position.txt');
+estimated_data = load('workingDirectory/estimated_position.txt');
+
+data_size = length(odometry_data);
+
+x_idxs = 1 : 3 : data_size;
+y_idxs = 2 : 3 : data_size;
+theta_idxs = 3 : 3 : data_size;
+
+odometry.x = odometry_data(x_idxs);
+odometry.y = odometry_data(y_idxs);
+odometry.theta = odometry_data(theta_idxs);
+
+estimated.x = estimated_data(x_idxs);
+estimated.y = estimated_data(y_idxs);
+estimated.theta = estimated_data(theta_idxs);
+
+axis equal
+scatter(odometry.x, odometry.y, 'x')
+axis equal
+
+hold on
+scatter(estimated.x, estimated.y)
+hold off

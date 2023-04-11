@@ -72,6 +72,8 @@ find /f/TEST/ -name fifth_run_total_distances* | sed -n '$p' | xargs -i cp -p {}
 find /f/DEBUG/ -name fifth_run_current_velocity* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_current_velocity.txt 
 find /f/DEBUG/ -name fifth_run_target_velocity* | sed -n '$p' | xargs -i cp -p {} workingDirectory/fifth_run_target_velocity.txt 
 
+find /f/STATELOG/ -name odometry_position* | sed -n '$p' | xargs -i cp -p {} workingDirectory/odometry_position.txt 
+find /f/STATELOG/ -name estimated_position* | sed -n '$p' | xargs -i cp -p {} workingDirectory/estimated_position.txt 
 
 #find /f/DEBUG/ -name rotation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/rotation_ratio.txt 
 #find /f/DEBUG/ -name translation_ratio* | sed -n '$p' | xargs -i cp -p {} workingDirectory/translation_ratio.txt 
